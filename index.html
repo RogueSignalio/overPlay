@@ -57,7 +57,7 @@
   var logo_vis = true
   var oplay;
   var op;
-  var dir = 'play/assets/'
+  var dir = './play/assets/'
   window.onload = function() {
     op = new OverPlay({ pre_canned: true, debug: true })
     logo = document.getElementById('logo');
@@ -67,7 +67,6 @@ setTimeout(()=>{
     setTimeout(()=>{ op.sound_load('s1',dir+'test1.wav'); },1000)
     setTimeout(()=>{ op.sound_load('beat1',dir+'beat1.mp3'); },1200)
     setTimeout(()=>{ op.sound_load('beat2',dir+'beat2.mp3'); },1400)
-//    setTimeout(()=>{ op.sound_load('beat3',dir+'beat3.mp3'); },1600)
     setTimeout(()=>{ op.sound_load('beat4',dir+'beat4.mp3'); },1800)
     setTimeout(()=>{ op.sound_load('violins1',dir+'violins1.mp3'); },2000)
     setTimeout(()=>{ op.sound_load('guitar1',dir+'guitar1.mp3'); },2200)
