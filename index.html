@@ -31,6 +31,7 @@
   <button onClick="op.sound_play('guitar1')">guitar1</button><br> 
   <button onClick="run_smoke()">Smokey</button><br>
 	<button onClick="op.play_max1()">Max</button><br>
+  <button onClick="max_smoke()">Smokey Max</button><br>
 </div>
 <div id="logo" class="logo" style="opacity:0.6;">
   <p class="rsyellow">OverPlay 0.4 by <a href="http://www.roguesignal.io" target="_BLANK_">RogueSignal.IO</a><p>
@@ -60,29 +61,29 @@
   var op;
   var dir = './play/assets/'
   window.onload = function() {
+    toggle_controls()
     op = new OverPlay({ pre_canned: true, debug: true })
     logo = document.getElementById('logo');
-    // logo.addEventListener("click", function(event) { this.blur(); ofx.run_fx_timed('roguesignal',3); event.stopPropagation();}, false);
-    // document.getElementById('readme').addEventListener("click", function(event) { event.stopPropagation(); }, false);
-setTimeout(()=>{
-    setTimeout(()=>{ op.sound_load('s1',dir+'test1.wav'); },1000)
-    setTimeout(()=>{ op.sound_load('beat1',dir+'beat1.mp3'); },1200)
-    setTimeout(()=>{ op.sound_load('beat2',dir+'beat2.mp3'); },1400)
-    setTimeout(()=>{ op.sound_load('beat4',dir+'beat4.mp3'); },1800)
-    setTimeout(()=>{ op.sound_load('violins1',dir+'violins1.mp3'); },2000)
-    setTimeout(()=>{ op.sound_load('guitar1',dir+'guitar1.mp3'); },2200)
-    setTimeout(()=>{ op.sound_load('choir1',dir+'choir1.mp3'); },2400)
-},1000)
+    setTimeout(()=>{
+        setTimeout(()=>{ op.sound_load('s1',dir+'test1.wav'); },1000)
+        setTimeout(()=>{ op.sound_load('beat1',dir+'beat1.mp3'); },1200)
+        setTimeout(()=>{ op.sound_load('beat2',dir+'beat2.mp3'); },1400)
+        setTimeout(()=>{ op.sound_load('beat4',dir+'beat4.mp3'); },1800)
+        setTimeout(()=>{ op.sound_load('violins1',dir+'violins1.mp3'); },2000)
+        setTimeout(()=>{ op.sound_load('guitar1',dir+'guitar1.mp3'); },2200)
+        setTimeout(()=>{ op.sound_load('choir1',dir+'choir1.mp3'); },2400)
+    },1000)
   };
 
+  function max_smoke() {
+    run_smoke()
+    setTimeout(()=>{
+      op.play_max1();
+    },2500)
+
+  }
+
   function run_smoke() {
-    // var cycle = "var colorme = function(){ "+
-    //             "setOverTimeout(()=>{ this.video_tint('t2',0x00FF00); },4000);"+
-    //             "setOverTimeout(()=>{ this.video_tint('t2',0x0000FF); },6000);"+
-    //             "setOverTimeout(()=>{ this.video_tint('t2',0x999900); },8000);"+
-    //             "setOverTimeout(()=>{ this.video_tint('t2',0xFF0000); },10000);"+
-    //             "setOverTimeout(()=>{ colorme() },8000);"+
-    //             "}.bind(op);"
     var cycle = "var colorme = function(){ "+
                 "setOverTimeout(()=>{ this.rainbow('t2',0x00FF00); },4000);"+
                 "setOverTimeout(()=>{ this.rainbow('t2',0x0000FF); },6000);"+
