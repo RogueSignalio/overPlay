@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<link rel="icon" href="assets/favicon.png">
+<title>OverPlay by RogueSignal.io</title>
+<link rel="stylesheet" href="css/over.css" id="page_style">
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.24.1/phaser.min.js" crossorigin="anonymous"></script>
+--><!-- Phaser 3.5+ changed rotation behavior on particles!?!?!?  Need to find some answers /-->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.85.0/phaser.min.js" crossorigin="anonymous"></script> 
+
+<script src="play/overplay.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<button id="controlz" class="control_icon" onclick="toggle_controls();">🠻🠻</button>
+<div id="controls" class="controls">
+  <button onClick="" class="toggle"><label for="bgt"><input type="checkbox" id="bgt" checked="true" onclick="toggle_bg();">🗔</label></button>
+  <button onClick="" class="toggle"><label for="logt"><input type="checkbox" id="logt" checked="true" onclick="toggle_logo()">🖾</label></button>
+<br>
+  <button onClick="" class="toggle"><label for="vol"><input type="checkbox" id="vol" checked="true" onclick="op.audio_toggle();">🕪</label></button>
+  <button onClick="op.stop()" class="toggle" style="color:red;">🛑</button>
+<br>
+  <button onClick="op.sound_play('s1')">Trumpet</button><br> 
+  <button onClick="op.sound_play('beat1',true)">Beat1 Loop</button><br> 
+  <button onClick="op.sound_play('beat2',true)">Beat2 Loop</button><br> 
+  <button onClick="op.sound_play('beat4',true)">Beat3 Loop</button><br> 
+  <button onClick="op.sound_play('choir1')">Choir1</button><br> 
+  <button onClick="op.sound_play('violins1')">violins1</button><br> 
+  <button onClick="op.sound_play('guitar1')">guitar1</button><br> 
+  <button onClick="run_smoke()">Smokey</button><br>
+	<button onClick="op.play_max1()">Max</button><br>
+</div>
+<div id="logo" class="logo" style="opacity:0.6;">
+  <p class="rsyellow">OverPlay 0.4 by <a href="http://www.roguesignal.io" target="_BLANK_">RogueSignal.IO</a><p>
+  <img src="assets/RogueSignal_FullLogo.svg" style="width:350px;"/>
+<!--   <p>Click Me!</p>
+  <ul id="details" class="details">
+    <li> OverPlay is a media control architecture, built on PhaserJS
+    <li> Designed to be plugged into OverAction, which is a websocket control inreface from your server application of choice.
+    <li> OverBridge is available to provide a simple websocket server with a JSON interface to allow easy integration with any control platform. 
+    <li> OverPlay was designed to perform remote triggering of multimedia from a server to clients.
+    <li> Simple to use in any Javascript or Web page.
+    <li> OverPlay can be integrated with other Over modules, like OverFX. 
+    <li> OverScript allows you to write and trigger scene scripts.
+    <li> See code & <a href="https://github.com/roguesignalio/overplay" target="_BLANK_" id="readme">Git Project</a> for more.
+    <li> Uses PhaserJS 3.55.  Particle rotation issue on 3.6+
+    <li> Audio sourced from:
+        <a href="http://www.freesoundslibrary.com" target="_BLANK_">FreeSoundsLibrary</a> & 
+        <a href="http://pixabay.com" target="_BLANK_">Pixabay</a>
+  <ul>
+ --></div>
+
+<script>
+  var bg_vis = true
+  var logo_vis = true
+  var oplay;
+  var op;
+  var dir = 'play/assets/'
+  window.onload = function() {
+    op = new OverPlay({ pre_canned: true, debug: true })
+    logo = document.getElementById('logo');
+    // logo.addEventListener("click", function(event) { this.blur(); ofx.run_fx_timed('roguesignal',3); event.stopPropagation();}, false);
+    // document.getElementById('readme').addEventListener("click", function(event) { event.stopPropagation(); }, false);
+setTimeout(()=>{
+    setTimeout(()=>{ op.sound_load('s1',dir+'test1.wav'); },1000)
+    setTimeout(()=>{ op.sound_load('beat1',dir+'beat1.mp3'); },1200)
+    setTimeout(()=>{ op.sound_load('beat2',dir+'beat2.mp3'); },1400)
+//    setTimeout(()=>{ op.sound_load('beat3',dir+'beat3.mp3'); },1600)
+    setTimeout(()=>{ op.sound_load('beat4',dir+'beat4.mp3'); },1800)
+    setTimeout(()=>{ op.sound_load('violins1',dir+'violins1.mp3'); },2000)
+    setTimeout(()=>{ op.sound_load('guitar1',dir+'guitar1.mp3'); },2200)
+    setTimeout(()=>{ op.sound_load('choir1',dir+'choir1.mp3'); },2400)
+},1000)
+  };
+
+  function run_smoke() {
+    // var cycle = "var colorme = function(){ "+
+    //             "setOverTimeout(()=>{ this.video_tint('t2',0x00FF00); },4000);"+
+    //             "setOverTimeout(()=>{ this.video_tint('t2',0x0000FF); },6000);"+
+    //             "setOverTimeout(()=>{ this.video_tint('t2',0x999900); },8000);"+
+    //             "setOverTimeout(()=>{ this.video_tint('t2',0xFF0000); },10000);"+
+    //             "setOverTimeout(()=>{ colorme() },8000);"+
+    //             "}.bind(op);"
+    var cycle = "var colorme = function(){ "+
+                "setOverTimeout(()=>{ this.rainbow('t2',0x00FF00); },4000);"+
+                "setOverTimeout(()=>{ this.rainbow('t2',0x0000FF); },6000);"+
+                "setOverTimeout(()=>{ this.rainbow('t2',0x999900); },8000);"+
+                "setOverTimeout(()=>{ this.rainbow('t2',0xFF0000); },10000);"+
+                "setOverTimeout(()=>{ this.rainbow('t1',0x999900); },4000);"+
+                "setOverTimeout(()=>{ this.rainbow('t1',0xFF0000); },6000);"+
+                "setOverTimeout(()=>{ this.rainbow('t1',0x00FF00); },8000);"+
+                "setOverTimeout(()=>{ this.rainbow('t1',0x0000FF); },10000);"+
+                "setOverTimeout(()=>{ colorme() },8000);"+
+                "}.bind(op);"
+
+    var aa = cycle + "this.video_load('t1','play/assets/test1.mp4'); this.video_load('t2','play/assets/test1.mp4');"+
+             "setOverTimeout(()=>{"+
+                "this.video_tint('t2',0xFF0000); this.video_alpha('t2',0.6); this.video_play('t2'); this.videos.t1.setFlipX(true);"+
+                "this.video_tint('t1',0x0000FF); this.video_alpha('t1',0.6); this.video_play('t1'); this.to_front(-1000);"+
+             "},1500); colorme()";
+    var d = function() { eval(aa) }.bind(op)
+    d();
+  }
+
+  function toggle_controls() {
+    let controls = document.getElementById('controls');
+    if (controls.style.visibility == "hidden" || controls.style.visibility == "") {
+      controls.style.visibility = "visible";
+    } else {
+      controls.style.visibility = "hidden";
+    }
+  }
+
+  function toggle_bg() {
+    if (bg_vis == true) { document.body.style.backgroundImage = 'none'; bg_vis = false; }
+    else { document.body.style.backgroundImage = "url('assets/roguesignal_bg.png')"; bg_vis = true; }
+  }
+
+  function toggle_logo() {
+    document.getElementById('logo').style.visibility = logo_vis ? "hidden" : "visible"
+    logo_vis = logo_vis ? false : true
+  }
+
+</script>
+</body>
